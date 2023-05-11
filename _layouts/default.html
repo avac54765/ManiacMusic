@@ -28,7 +28,9 @@
       <section>
         <!-- nighthawk coding society has altered arrangement and inserted navigation that is updated in independent file -->
         <div id="title">
-          <img src="/images/maniaclogolong.png">
+          <h1><a href={{ site.gitorg }}>{{ site.title | default: site.github.repository_name }}</a></h1>
+          <p> </p>
+          <img width="700" alt="maniaclogolong" src="https://github.com/avac54765/avaflaskproject/assets/111486111/0e027c4c-a461-4a68-9bc0-4b9dbbb77e3c">
           <style>
             img {
               display: block;
@@ -37,7 +39,6 @@
             }
             </style>
           <p> </p>
-          <h1><a href={{ site.gitorg }}>{{ site.title | default: site.github.repository_name }}</a></h1>
           <p>{{ site.description | default: site.github.project_tagline }}</p>
           <hr>
           {% include home.html %}

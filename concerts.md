@@ -19,30 +19,19 @@ use api from here: https://rapidapi.com/seatgeek/api/seatgeek/
 
 <form action="javascript:create_FAV()">
     <p><label>
-        Song Name
+        Song Name:
         <input type="text" name="songname" id="songname" required>
     </label></p>
     <p><label>
-        Date of Completion:
-        <input type="date" name="date2" id="date2" required>
+        Artist:
+        <input type="text" name="srtist" id="artist" required>
     </label></p>
     <p><label>
-        Number of Hours Completed:
-        <input type="number" name="duration2" id="duration2" required>
-    </label></p>
-    <p><label>
-        Grade:
-        <!--<input type="text" name="grade" id="grade" required>-->
-         <select name="Grade" id="grade">
-      <option value="A">A</option>
-      <option value="B">B</option>
-      <option value="C">C</option>
-      <option value="D">D</option>
-      <option value="F">F</option>
-  </select>
+        Album:
+        <input type="text" name="album" id="album" required>
     </label></p>
     <p>
-        <button>Submit</button>
+        <button>Submit New Song</button>
     </p>
 </form>
 
@@ -50,13 +39,13 @@ use api from here: https://rapidapi.com/seatgeek/api/seatgeek/
   // prepare HTML result container for new output
   const resultContainer = document.getElementById("result");
   // prepare URL's to allow easy switch from deployment and localhost
-  const url = "https://teambaddieflask.duckdns.org/api/ISPE"
-  //const url = "https://flask.nighthawkcodingsociety.com/api/users"
+  //const url = "https://teambaddieflask.duckdns.org/api/ISPE"
+  const url = "http://127.0.0.1:8086/api/FAV"
   const create_fetch = url + '/create';
   const read_fetch = url + '/';
 
   // Load users on page entry
-  read_ISPE();
+  read_FAV();
 
 
   // Display User Table, data is fetched from Backend Database

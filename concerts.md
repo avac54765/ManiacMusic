@@ -49,7 +49,7 @@ use api from here: https://rapidapi.com/seatgeek/api/seatgeek/
 
 
   // Display User Table, data is fetched from Backend Database
-  function read_ISPE() {
+  function read_FAV() {
     // prepare fetch options
     const read_options = {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -99,10 +99,9 @@ use api from here: https://rapidapi.com/seatgeek/api/seatgeek/
 
   function create_FAV(){
     const body = {
-        name2: document.getElementById("name2").value,
-        date2: document.getElementById("date2").value,
-        duration2: document.getElementById("duration2").value,
-        grade: document.getElementById("grade").value
+        songname: document.getElementById("songname").value,
+        artist: document.getElementById("artist").value,
+        album: document.getElementById("album").value,
     };
     const requestOptions = {
         method: 'POST',
@@ -119,10 +118,13 @@ use api from here: https://rapidapi.com/seatgeek/api/seatgeek/
       .then(response => {
         // trap error response from Web API
         if (response.status == 211) {
-          alert('Name is missing, or is less than 2 characters, please refresh and enter a valid name')
+          alert('Song name is missing, or is less than 2 characters, please refresh and enter a valid song name')
         }
         if (response.status == 212) {
-          alert('Duration is missing, or is not an integer, please enter a valid duration')
+          alert('Artist is missing, or is less than 2 characters, please refresh and enter a valid artist')
+        }
+        if (response.status == 213) {
+          alert('Album is missing, or is less than 2 characters, please refresh and enter a valid album')
         }
 
         if (response.status !== 200) {
@@ -146,22 +148,20 @@ use api from here: https://rapidapi.com/seatgeek/api/seatgeek/
 
   function add_row(data) {
     const tr = document.createElement("tr");
-    const name2 = document.createElement("td");
-    const date2 = document.createElement("td");
-    const duration2 = document.createElement("td");
-    const grade = document.createElement("td");
+    const songname = document.createElement("td");
+    const artist = document.createElement("td");
+    const album = document.createElement("td");
 
     // obtain data that is specific to the API
-    name2.innerHTML = data.name2; 
-    date2.innerHTML = data.date2; 
-    duration2.innerHTML = data.duration2; 
-    grade.innerHTML = data.grade; 
+    songname.innerHTML = data.songname; 
+    artist.innerHTML = data.artist; 
+    album.innerHTML = data.album; 
+   
 
     // add HTML to container
-    tr.appendChild(name2);
-    tr.appendChild(date2);
-    tr.appendChild(duration2);
-    tr.appendChild(grade);
+    tr.appendChild(songname);
+    tr.appendChild(artist);
+    tr.appendChild(album);
 
     resultContainer.appendChild(tr);
   }
@@ -186,10 +186,5 @@ use api from here: https://rapidapi.com/seatgeek/api/seatgeek/
          }
 
 </style>
-
-<br>
-<br>
-<button type="button" onclick="window.print();" class>Click here to print your report</button>
-</body>
 
 </html>

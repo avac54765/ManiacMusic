@@ -1,16 +1,59 @@
 
-<table>
-  <thead>
-  <tr>
-    <th>Song Name</th>
-    <th>Artist</th>
-    <th>Album</th>
-  </tr>
-  </thead>
-  <tbody id="result">
-    <!-- javascript generated data -->
-  </tbody>
+<head>
+    <!-- JQuery -->
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <style>
+        #flaskTable th:first-child {
+            width: 75px;
+        }
+        #flaskTable td:not(:first-child) {
+          width: 150px;
+        }
+        table.dataTable td {
+        color: black;
+        }
+    </style>
+
+</head>
+
+<table id="flaskTable" class="table table-striped nowrap" style="width:100%">
+    <thead id="flaskHead">
+        <tr>
+            <th>Song Name</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody id="flaskBody"></tbody>
 </table>
+
+<script>
+  $(document).ready(function() {
+    fetch('http://172.26.151.226:8086/api/FAV/', { mode: 'cors' })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('API response failed');
+      }
+      return response.json();
+    })
+    .then(data => {
+      for (const row of data) {
+        $('#flaskBody').append('<tr><td>' + 
+            row.songname + '</td><td>' + 
+            row.artist + '</td><td>' + 
+            row.album + '</td><td>'); 
+      }
+      $("#flaskTable").DataTable();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+</script>
 
 
 <form action="javascript:create_FAV()">
@@ -142,25 +185,25 @@
     })
   }
 
-  function add_row(data) {
-    const tr = document.createElement("tr");
-    const songname = document.createElement("td");
-    const artist = document.createElement("td");
-    const album = document.createElement("td");
+  //function add_row(data) {
+    //const tr = document.createElement("tr");
+    //const songname = document.createElement("td");
+    //const artist = document.createElement("td");
+    //const album = document.createElement("td");
 
     // obtain data that is specific to the API
-    songname.innerHTML = data.songname; 
-    artist.innerHTML = data.artist; 
-    album.innerHTML = data.album; 
+    //songname.innerHTML = data.songname; 
+    //artist.innerHTML = data.artist; 
+    //album.innerHTML = data.album; 
    
 
     // add HTML to container
-    tr.appendChild(songname);
-    tr.appendChild(artist);
-    tr.appendChild(album);
+    //tr.appendChild(songname);
+    //tr.appendChild(artist);
+    //tr.appendChild(album);
 
-    resultContainer.appendChild(tr);
-  }
+    //resultContainer.appendChild(tr);
+  //}
 
 </script>
 
@@ -184,3 +227,47 @@
 </style>
 
 
+
+<html>
+<head>
+  <!-- Include necessary libraries -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+  <style>
+  table.dataTable td {
+    color: black;
+  }
+</style>
+</head>
+<body>
+
+  <script>
+    $(document).ready(function() {
+      // Initialize DataTable
+      $('#dynamic-table').DataTable();
+
+      // Handle form submission
+      $('#add-form').submit(function(event) {
+        event.preventDefault(); // Prevent form submission
+        
+        // Get the form data
+        var songname = $('#songname').val();
+        var artist = $('#artist').val();
+        var album = $('#album').val();
+
+        // Create a new table row with the form data
+        var newRow = '<tr><td>' + songname + '</td><td>' + artist + '</td><td>' + album + '</td></tr>';
+
+        // Add the new row to the table
+        $('#dynamic-table').DataTable().row.add($(newRow)).draw();
+
+        // Reset the form fields
+        $('#songname').val('');
+        $('#artist').val('');
+        $('#album').val('');
+      });
+    });
+  </script>
+</body>
+</html>

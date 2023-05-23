@@ -2,8 +2,10 @@
 
 
 
-<h1>Today's Concerts!</h1>
-<h2>Search for a specific concert below!<h2>
+
+<h1>Today's Sports Events!</h1>
+<h2>Search for a specific sports event below!<h2>
+
 
 <html>
 <head>
@@ -73,7 +75,7 @@
   <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
   <script>
     $(document).ready(function() {
-    var apiUrl = 'https://api.seatgeek.com/2/events?q=concert';
+    var apiUrl = 'https://api.seatgeek.com/2/events?q=sport';
     var clientId = 'MzM3NjkyNzh8MTY4NDgxODg3Mi45OTMyOTk1';
     var clientSecret = 'bb0a4e78293d02ac50573254f61e3fd487680ca5678a8c58d1d7656ed5bff1f8';
     $.ajax({
@@ -113,5 +115,3 @@
 </script>
 </body>
 </html>
-
-

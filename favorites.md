@@ -158,12 +158,12 @@ function create_FAV() {
 
 <style>
  button {
-            background-color: #128ca7;
+            background-color: #724283;
             color: black;
             text-align: center;
             font-size: 15px;
             height: 75;
-            width: 500;
+            width: 530;
             margin-left: auto;
             margin-right: auto;
             padding: 15px 32px;

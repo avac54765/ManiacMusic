@@ -1,5 +1,5 @@
-var redirect_uri = "https://avac54765.github.io/ManiacMusic/"; // change this your value
-//var redirect_uri = "http://127.0.0.1:5500/index.html";
+//var redirect_uri = "https://avac54765.github.io/ManiacMusic/"; // change this your value
+var redirect_uri = "http://127.0.0.1:5500/index.html";
  
 
 var client_id = ""; 

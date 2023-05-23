@@ -8,11 +8,11 @@
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <style>
-        #flaskTable th:first-child {
-            width: 75px;
+         #flaskTable th:first-child {
+            width: 150px;
         }
         #flaskTable td:not(:first-child) {
-            width: 150px;
+            width: 200px;
         }
         table.dataTable td {
             color: black;
@@ -34,10 +34,11 @@
         #flaskTable {
             margin-bottom: 5px;
             color: white;
+            width: 800px; /* Adjust the width as needed */
         }
         #flaskTable th, #flaskTable td {
             border-bottom: 1px solid white;
-            padding: 8px;
+            padding: 15px; /* Adjust the padding as needed */
         }
         #flaskTable th {
             background-color: #724283;
@@ -185,23 +186,7 @@ function create_FAV() {
 </body>
 </html>
 
-<!--
-<style>
- button {
-            background-color: #724283;
-            color: black;
-            text-align: center;
-            font-size: 15px;
-            height: 75;
-            width: 530;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 15px 32px;
-            display: flex;
-            justify-content: center;
-         }
 
-</style> --->
 
 
 

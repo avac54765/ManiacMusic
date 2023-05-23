@@ -23,8 +23,21 @@
     </style>
 </head>
 <body>
-
-<table id="flaskTable" class="table table-striped nowrap" style="width:100%">
+<style>
+  /* Center the table and input forms */
+  .center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50vh;
+  }
+  #flaskTable {
+    margin-bottom: 5px;
+  }
+</style>
+<div class="center-container">
+  <table id="flaskTable" class="table table-striped nowrap" style="width:100%">
     <thead id="flaskHead">
         <tr>
             <th>Song Name</th>
@@ -33,9 +46,10 @@
         </tr>
     </thead>
     <tbody id="flaskBody"></tbody>
-</table>
+  </table>
+</div>
 
-<form>
+<form class="center-container">
     <p><label>
         Song Name:
         <input type="text" name="songname" id="songname" required>

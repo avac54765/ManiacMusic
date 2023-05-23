@@ -1,3 +1,6 @@
+{% include seatgeek.html %}
+
+
 
 <h1>Today's Concerts!</h1>
 <h2>Search for a specific concert below!<h2>
@@ -5,6 +8,7 @@
 <html>
 <head>
   <title>Event List</title>
+  <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette">-->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
   <style>
     #eventTable td {
@@ -109,3 +113,5 @@
 </script>
 </body>
 </html>
+
+

@@ -20,6 +20,10 @@
             background-color: black;
             color: white;
         }
+        div.dataTables_wrapper div.dataTables_filter label {
+        color: white;
+        margin-right: 5px;
+        }
     </style>
 </head>
 <body>

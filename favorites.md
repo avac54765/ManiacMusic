@@ -12,18 +12,47 @@
             width: 75px;
         }
         #flaskTable td:not(:first-child) {
-          width: 150px;
+            width: 150px;
         }
         table.dataTable td {
-        color: black;
+            color: black;
         }
         input[type="text"] {
             background-color: black;
             color: white;
         }
         div.dataTables_wrapper div.dataTables_filter label {
-        color: white;
-        margin-right: 5px;
+            color: white;
+            margin-right: 5px;
+        }
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #flaskTable {
+            margin-bottom: 5px;
+            color: white;
+        }
+        #flaskTable th, #flaskTable td {
+            border-bottom: 1px solid white;
+            padding: 8px;
+        }
+        #flaskTable th {
+            background-color: #724283;
+        }
+        #flaskTable tbody tr:hover {
+            background-color: #724283;
+        }
+        button {
+            background-color: #724283;
+            color: white;
+            text-align: center;
+            font-size: 15px;
+            height: 50px;
+            width: 200px;
+            margin: 10px;
         }
     </style>
 </head>
@@ -156,7 +185,7 @@ function create_FAV() {
 </body>
 </html>
 
-
+<!--
 <style>
  button {
             background-color: #724283;
@@ -172,7 +201,7 @@ function create_FAV() {
             justify-content: center;
          }
 
-</style>
+</style> --->
 
 
 

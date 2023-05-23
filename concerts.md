@@ -33,7 +33,7 @@
       background-color: #f2f2f2;
     }
     #eventTable tbody tr:hover {
-      background-color: #ddd;
+      background-color: #724283;
     }
     div.dataTables_wrapper div.dataTables_filter label {
       color: white;

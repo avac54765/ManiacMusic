@@ -125,9 +125,6 @@ function create_FAV() {
 </html>
 
 
-
-<!-- END OF NEW CODE-->
-
 <style>
  button {
             background-color: #128ca7;

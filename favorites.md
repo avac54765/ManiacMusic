@@ -1,5 +1,6 @@
 <html>
 <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette">
     <!-- JQuery -->
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -27,14 +28,26 @@
     </style>
 </head>
 <body>
+<h1 style="font-weight: bold">Community Favorite Songs!</h1>
+<h2>Add your favorite song below to share your opinion!</h2>
 <style>
+  h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 45px;
+    font-family: 'FontName', Courgette;
+    }
+  h2 {
+    text-align: center;
+    margin-bottom: 100px;
+    font-size: 20px;
+  }
   /* Center the table and input forms */
   .center-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 50vh;
   }
   #flaskTable {
     margin-bottom: 5px;

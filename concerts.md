@@ -69,35 +69,48 @@
   <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
   <script>
     $(document).ready(function() {
-      var apiUrl = 'https://api.seatgeek.com/2/events?q=concert';
-      var clientId = 'MzM3NjkyNzh8MTY4NDgxODg3Mi45OTMyOTk1';
-      var clientSecret = 'bb0a4e78293d02ac50573254f61e3fd487680ca5678a8c58d1d7656ed5bff1f8';
+    var apiUrl = 'https://api.seatgeek.com/2/events?q=concert';
+    var clientId = 'MzM3NjkyNzh8MTY4NDgxODg3Mi45OTMyOTk1';
+    var clientSecret = 'bb0a4e78293d02ac50573254f61e3fd487680ca5678a8c58d1d7656ed5bff1f8';
 
-      $.ajax({
-        url: apiUrl,
-        data: {
-          client_id: clientId,
-          client_secret: clientSecret
-        },
-        success: function(response) {
-          var events = response.events;
-          var tableBody = $('#eventTable tbody');
+    $.ajax({
+      url: apiUrl,
+      data: {
+        client_id: clientId,
+        client_secret: clientSecret
+      },
+      success: function(response) {
+        var events = response.events;
+        var tableBody = $('#eventTable tbody');
 
-          $.each(events, function(index, event) {
-            var newRow = '<tr>' +
-              '<td>' + event.title + '</td>' +
-              '<td>' + event.datetime_local + '</td>' +
-              '</tr>';
-            tableBody.append(newRow);
+        $.each(events, function(index, event) {
+          // Format the date in "month/day/year" format
+          var date = new Date(event.datetime_local).toLocaleDateString(undefined, {
+            month: 'numeric',
+            day: 'numeric',
+            year: 'numeric'
           });
 
-          $('#eventTable').DataTable();
-        },
-        error: function(xhr, status, error) {
-          console.log('Error:', error);
-        }
-      });
+          // Format the time in "2:00" format
+          var time = new Date(event.datetime_local).toLocaleTimeString(undefined, {
+            hour: 'numeric',
+            minute: '2-digit'
+          });
+
+          var newRow = '<tr>' +
+            '<td>' + event.title + '</td>' +
+            '<td>' + date + ' ' + time + '</td>' +
+            '</tr>';
+          tableBody.append(newRow);
+        });
+
+        $('#eventTable').DataTable();
+      },
+      error: function(xhr, status, error) {
+        console.log('Error:', error);
+      }
     });
-  </script>
+  });
+</script>
 </body>
 </html>

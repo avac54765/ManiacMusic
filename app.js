@@ -1,4 +1,4 @@
-var redirect_uri = "https://makeratplay.github.io/SpotifyWebAPI/"; // change this your value
+var redirect_uri = "https://avac54765.github.io/ManiacMusic/"; // change this your value
 //var redirect_uri = "http://127.0.0.1:5500/index.html";
  
 

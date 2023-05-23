@@ -1,4 +1,4 @@
-
+<html>
 <head>
     <!-- JQuery -->
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -16,10 +16,13 @@
         table.dataTable td {
         color: black;
         }
+        input[type="text"] {
+            background-color: black;
+            color: white;
+        }
     </style>
-
 </head>
-
+<body>
 
 <table id="flaskTable" class="table table-striped nowrap" style="width:100%">
     <thead id="flaskHead">
@@ -32,32 +35,7 @@
     <tbody id="flaskBody"></tbody>
 </table>
 
-<script>
-  $(document).ready(function() {
-    fetch('http://172.26.151.226:8086/api/FAV/', { mode: 'cors' })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('API response failed');
-      }
-      return response.json();
-    })
-    .then(data => {
-      for (const row of data) {
-        $('#flaskBody').append('<tr><td>' + 
-            row.songname + '</td><td>' + 
-            row.artist + '</td><td>' + 
-            row.album + '</td>'); 
-      }
-      $("#flaskTable").DataTable();
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  });
-</script>
-
-
-<form action="javascript:create_FAV()">
+<form>
     <p><label>
         Song Name:
         <input type="text" name="songname" id="songname" required>
@@ -71,79 +49,36 @@
         <input type="text" name="album" id="album" required>
     </label></p>
     <p>
-        <button>Submit New Song</button>
+        <button type="button" onclick="create_FAV()">Submit New Song</button>
     </p>
 </form>
-<style>
-    input[type="text"] {
-        background-color: black;
-        color: white;
-    }
-</style>
 
 <script>
-  // prepare HTML result container for new output
-  const resultContainer = document.getElementById("result");
-  // prepare URL's to allow easy switch from deployment and localhost
-  //const url = "https://teambaddieflask.duckdns.org/api/ISPE"
-  const url = "http://127.0.0.1:8086/api/FAV"
-  const create_fetch = url + '/create';
-  const read_fetch = url + '/';
-
-  // Load users on page entry
-  read_FAV();
-
-
-  // Display User Table, data is fetched from Backend Database
-  function read_FAV() {
-    // prepare fetch options
-    const read_options = {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'omit', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    };
-
-    // fetch the data from API
-    fetch(read_fetch, read_options)
-      // response is a RESTful "promise" on any successful fetch
-      .then(response => {
-        // check for response errors
-        if (response.status !== 200) {
-          const errorMsg = 'Database read error: ' + response.status;
-          console.log(errorMsg);
-          const tr = document.createElement("tr");
-          const td = document.createElement("td");
-          td.innerHTML = errorMsg;
-          tr.appendChild(td);
-          resultContainer.appendChild(tr);
-          return;
-        }
-        
-        // valid response will have json data
-        response.json().then(data => {
-            console.log(data);
-            for (let row in data) {
-              console.log(data[row]);
-              add_row(data[row]);
-            }
-        })
-    })
-    // catch fetch errors (ie ACCESS to server blocked)
-    .catch(err => {
-      console.error(err);
-      const tr = document.createElement("tr");
-      const td = document.createElement("td");
-      td.innerHTML = err;
-      tr.appendChild(td);
-      resultContainer.appendChild(tr);
+$(document).ready(function() {
+    const table = $('#flaskTable').DataTable({
+        order: [[0, 'asc']] // Specify the initial sorting column and direction
     });
-  }
 
-  function create_FAV(){
+    // Fetch data from the API and populate the table
+    fetch('http://172.26.151.226:8086/api/FAV/', { mode: 'cors' })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('API response failed');
+            }
+            return response.json();
+        })
+        .then(data => {
+            for (const row of data) {
+                table.row.add([row.songname, row.artist, row.album]);
+            }
+            table.draw();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+
+function create_FAV() {
     const body = {
         songname: document.getElementById("songname").value,
         artist: document.getElementById("artist").value,
@@ -158,61 +93,38 @@
         },
     };
 
-    // URL for Create API
-    // Fetch API call to the database to create a new user
+    const create_fetch = 'http://172.26.151.226:8086/api/FAV/create';
+
     fetch(create_fetch, requestOptions)
-      .then(response => {
-        // trap error response from Web API
-        if (response.status == 211) {
-          alert('Song name is missing, or is less than 2 characters, please refresh and enter a valid song name')
-        }
-        if (response.status == 212) {
-          alert('Artist is missing, or is less than 2 characters, please refresh and enter a valid artist')
-        }
-        if (response.status == 213) {
-          alert('Album is missing, or is less than 2 characters, please refresh and enter a valid album')
-        }
-
-        if (response.status !== 200) {
-          const errorMsg = 'Database create error: ' + response.status;
-          console.log(errorMsg);
-          const tr = document.createElement("tr");
-          const td = document.createElement("td");
-          td.innerHTML = errorMsg;
-          tr.appendChild(td);
-          resultContainer.appendChild(tr);
-          return;
-        }
-        // response contains valid result
-        response.json().then(data => {
-            console.log(data);
-            //add a table row for the new/created userid
-            add_row(data);
+        .then(response => {
+            if (response.status == 211) {
+                alert('Song name is missing, or is less than 2 characters, please refresh and enter a valid song name');
+            }
+            if (response.status == 212) {
+                alert('Artist is missing, or is less than 2 characters, please refresh and enter a valid artist');
+            }
+            if (response.status == 213) {
+                alert('Album is missing, or is less than 2 characters, please refresh and enter a valid album');
+            }
+            if (response.status !== 200) {
+                throw new Error('Database create error: ' + response.status);
+            }
+            return response.json();
         })
-    })
-  }
-
-  //function add_row(data) {
-    //const tr = document.createElement("tr");
-    //const songname = document.createElement("td");
-    //const artist = document.createElement("td");
-    //const album = document.createElement("td");
-
-    // obtain data that is specific to the API
-    //songname.innerHTML = data.songname; 
-    //artist.innerHTML = data.artist; 
-    //album.innerHTML = data.album; 
-   
-
-    // add HTML to container
-    //tr.appendChild(songname);
-    //tr.appendChild(artist);
-    //tr.appendChild(album);
-
-    //resultContainer.appendChild(tr);
-  //}
-
+        .then(data => {
+            const table = $('#flaskTable').DataTable();
+            table.row.add([data.songname, data.artist, data.album]).draw();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
 </script>
+
+</body>
+</html>
+
+
 
 <!-- END OF NEW CODE-->
 

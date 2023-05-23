@@ -1,6 +1,6 @@
 //credit to [Michael Hawkins](https://github.com/makeratplay)
 
-// API ONLY WORKS IF DONE IN AN INCOGNITO TAB W NO CACHE
+// API ONLY WORKS IF DONE IN AN INCOGNITO TAB WITH NO CACHE
 
 var redirect_uri = "https://avac54765.github.io/ManiacMusic/songs.html"; // change this your value
 //var redirect_uri = "http://127.0.0.1:4000/ManiacMusic/songs.html";

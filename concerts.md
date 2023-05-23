@@ -1,22 +1,78 @@
-# Concert API, table, and search here
 
-use api from here: https://rapidapi.com/seatgeek/api/seatgeek/
+<h1>Today's Concerts!</h1>
+<h2>Search for a specific concert below!<h2>
 
+<html>
+<head>
+  <title>Event List</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+  <style>
+    #eventTable td {
+      color: black;
+    }
+    div.dataTables_wrapper div.dataTables_filter label {
+        color: white;
+    }
+    h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 45px;
+    font-family: 'FontName', Courgette;
+    }
+  h2 {
+    text-align: center;
+    margin-bottom: 100px;
+    font-size: 20px;
+    color: #724283;
+  }
+  </style>
+</head>
+<body>
+  <table id="eventTable">
+    <thead>
+      <tr>
+        <th class="sortable" data-sort="title">Event Title</th>
+        <th class="sortable" data-sort="datetime_local">Date and Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Event data will be inserted dynamically here -->
+    </tbody>
+  </table>
 
-import requests
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var apiUrl = 'https://api.seatgeek.com/2/events?q=concert';
+      var clientId = 'MzM3NjkyNzh8MTY4NDgxODg3Mi45OTMyOTk1';
+      var clientSecret = 'bb0a4e78293d02ac50573254f61e3fd487680ca5678a8c58d1d7656ed5bff1f8';
 
-url = 'https://api.seatgeek.com/2/events'
-params = {
-    'client_id': 'MzM3NjkyNzh8MTY4NDgxODg3Mi45OTMyOTk1',
-    'client_secret': 'bb0a4e78293d02ac50573254f61e3fd487680ca5678a8c58d1d7656ed5bff1f8'
-}
+      $.ajax({
+        url: apiUrl,
+        data: {
+          client_id: clientId,
+          client_secret: clientSecret
+        },
+        success: function(response) {
+          var events = response.events;
+          var tableBody = $('#eventTable tbody');
 
-response = requests.get(url, params=params)
+          $.each(events, function(index, event) {
+            var newRow = '<tr>' +
+              '<td>' + event.title + '</td>' +
+              '<td>' + event.datetime_local + '</td>' +
+              '</tr>';
+            tableBody.append(newRow);
+          });
 
-# Check the response status code
-if response.status_code == 200:
-    data = response.json()
-    # Process the returned data
-    # ...
-else:
-    print('Error:', response.status_code)
+          $('#eventTable').DataTable();
+        },
+        error: function(xhr, status, error) {
+          console.log('Error:', error);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

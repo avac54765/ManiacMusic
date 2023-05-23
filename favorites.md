@@ -63,7 +63,7 @@
     </label></p>
     <p><label>
         Artist:
-        <input type="text" name="srtist" id="artist" required>
+        <input type="text" name="artist" id="artist" required>
     </label></p>
     <p><label>
         Album:
@@ -73,6 +73,12 @@
         <button>Submit New Song</button>
     </p>
 </form>
+<style>
+    input[type="text"] {
+        background-color: black;
+        color: white;
+    }
+</style>
 
 <script>
   // prepare HTML result container for new output

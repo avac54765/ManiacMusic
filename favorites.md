@@ -5,6 +5,7 @@
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <!-- Bootstrap -->
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <style>
         #flaskTable th:first-child {
             width: 75px;
@@ -19,13 +20,13 @@
 
 </head>
 
+
 <table id="flaskTable" class="table table-striped nowrap" style="width:100%">
     <thead id="flaskHead">
         <tr>
             <th>Song Name</th>
             <th>Artist</th>
             <th>Album</th>
-            <th> </th>
         </tr>
     </thead>
     <tbody id="flaskBody"></tbody>
@@ -45,7 +46,7 @@
         $('#flaskBody').append('<tr><td>' + 
             row.songname + '</td><td>' + 
             row.artist + '</td><td>' + 
-            row.album + '</td><td>'); 
+            row.album + '</td>'); 
       }
       $("#flaskTable").DataTable();
     })
@@ -234,46 +235,4 @@
 
 
 
-<html>
-<head>
-  <!-- Include necessary libraries -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
-  <style>
-  table.dataTable td {
-    color: black;
-  }
-</style>
-</head>
-<body>
 
-  <script>
-    $(document).ready(function() {
-      // Initialize DataTable
-      $('#dynamic-table').DataTable();
-
-      // Handle form submission
-      $('#add-form').submit(function(event) {
-        event.preventDefault(); // Prevent form submission
-        
-        // Get the form data
-        var songname = $('#songname').val();
-        var artist = $('#artist').val();
-        var album = $('#album').val();
-
-        // Create a new table row with the form data
-        var newRow = '<tr><td>' + songname + '</td><td>' + artist + '</td><td>' + album + '</td></tr>';
-
-        // Add the new row to the table
-        $('#dynamic-table').DataTable().row.add($(newRow)).draw();
-
-        // Reset the form fields
-        $('#songname').val('');
-        $('#artist').val('');
-        $('#album').val('');
-      });
-    });
-  </script>
-</body>
-</html>

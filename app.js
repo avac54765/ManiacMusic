@@ -62,10 +62,10 @@ function getCode(){
 }
 
 function requestAuthorization(){
-    client_id = document.getElementById("clientId").value;
-    client_secret = document.getElementById("clientSecret").value;
-    localStorage.setItem("client_id", client_id);
-    localStorage.setItem("client_secret", client_secret); // In a real app you should not expose your client_secret to the user
+    //client_id = document.getElementById("clientId").value;
+    //client_secret = document.getElementById("clientSecret").value;
+    //localStorage.setItem("client_id", client_id);
+    //localStorage.setItem("client_secret", client_secret); // In a real app you should not expose your client_secret to the user
 
     let url = AUTHORIZE;
     url += "?client_id=" + client_id;

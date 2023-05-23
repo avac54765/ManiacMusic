@@ -41,6 +41,7 @@
     text-align: center;
     margin-bottom: 100px;
     font-size: 20px;
+    color: #724283;
   }
   /* Center the table and input forms */
   .center-container {

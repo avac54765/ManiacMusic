@@ -118,10 +118,10 @@
 <script>
 $(document).ready(function() {
     const table = $('#flaskTable').DataTable({
-        order: [[0, 'asc']] // Specify the initial sorting column and direction
+        order: [[0, 'asc']] // Specify sorting column and direction
     });
 
-    // Fetch data from the API and populate the table
+    // Fetch data from the API
     fetch('http://172.26.151.226:8086/api/FAV/', { mode: 'cors' })
         .then(response => {
             if (!response.ok) {

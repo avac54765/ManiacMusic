@@ -88,6 +88,7 @@
   <table id="flaskTable" class="table table-striped nowrap" style="width:100%">
     <thead id="flaskHead">
         <tr>
+            <button onclick="remove()">X</button>
             <th>Song Name</th>
             <th>Artist</th>
             <th>Album</th>
@@ -139,7 +140,6 @@ $(document).ready(function() {
         .catch(error => {
             console.error('Error:', error);
         });
-});
 
 function create_FAV() {
     const body = {
@@ -181,6 +181,52 @@ function create_FAV() {
         .catch(error => {
             console.error('Error:', error);
         });
+        
+function remove() {
+    const table = $('#flaskTable').DataTable();
+    const selectedRow = table.row('.selected');
+
+    if (selectedRow.any()) {
+        selectedRow.remove().draw();
+
+        // Get the song details from the selected row
+        const songName = selectedRow.data()[0];
+        const artist = selectedRow.data()[1];
+        const album = selectedRow.data()[2];
+
+        // Prepare the request body
+        const body = {
+            songname: songName,
+            artist: artist,
+            album: album
+        };
+
+        const requestOptions = {
+            method: 'DELETE',
+            body: JSON.stringify(body),
+            headers: {
+                "content-type": "application/json",
+                'Authorization': 'Bearer my-token'
+            }
+        };
+
+        // Replace 'http://127.0.0.1:8086/api/FAV/delete' local host
+        const deleteURL = 'https://maniacmusic.duckdns.org/api/FAV/delete';
+
+        fetch(deleteURL, requestOptions)
+            .then(response => {
+                if (response.status === 200) {
+                    console.log('Song deleted successfully.');
+                } else {
+                    throw new Error('Failed to delete song: ' + response.status);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    } else {
+        alert('Please select a row to delete.');
+    }
 }
 </script>
 

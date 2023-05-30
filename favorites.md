@@ -122,7 +122,8 @@ $(document).ready(function() {
     });
 
     // Fetch data from the API
-    fetch('http://127.0.0.1:8086/api/FAV/', { mode: 'cors' })
+    //fetch('http://127.0.0.1:8086/api/FAV/', { mode: 'cors' })
+    fetch('https://maniacmusic.duckdns.org/api/FAV/', { mode: 'cors' })
         .then(response => {
             if (!response.ok) {
                 throw new Error('API response failed');

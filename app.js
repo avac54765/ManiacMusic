@@ -2,8 +2,8 @@
 
 // API ONLY WORKS IF DONE IN AN INCOGNITO TAB WITH NO CACHE
 
-//var redirect_uri = "https://avac54765.github.io/ManiacMusic/songs.html"; // change this your value
-var redirect_uri = "http://127.0.0.1:4000/songs";
+var redirect_uri = "https://avac54765.github.io/ManiacMusic/songs.html"; // change this your value
+//var redirect_uri = "http://127.0.0.1:4000/songs";
  
 
 var client_id = ""; 
@@ -62,8 +62,12 @@ function getCode(){
 }
 
 function requestAuthorization(){
-    client_id = document.getElementById("clientId").value;
-    client_secret = document.getElementById("clientSecret").value;
+    //client_id = document.getElementById("clientId").value;
+    //client_secret = document.getElementById("clientSecret").value;
+    //localStorage.setItem("client_id", client_id);
+    //localStorage.setItem("client_secret", client_secret); // In a real app you should not expose your client_secret to the user
+    client_id = "2b9fdadcb84f421eac431dbf3a2a0581";
+    client_secret = "2e007e8c8e014ef8addb45a652b6476d";
     localStorage.setItem("client_id", client_id);
     localStorage.setItem("client_secret", client_secret); // In a real app you should not expose your client_secret to the user
 

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette">-->
@@ -8,8 +9,8 @@
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <style>
-         #flaskTable th:first-child {
-            width: 150px;
+        #flaskTable th:first-child {
+            width: 10px;
         }
         #flaskTable td:not(:first-child) {
             width: 200px;
@@ -55,186 +56,162 @@
             width: 200px;
             margin: 10px;
         }
+        .remove-button {
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size:15px;
+            width: 25px; /* Specify the width of the button */
+            height: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 45px;
+            font-family: 'FontName', Courgette;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 100px;
+            font-size: 20px;
+            color: #724283;
+        }
+        /* Center the table and input forms */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #flaskTable {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
-<h1>Community Favorite Songs!</h1>
-<h2>Add your favorite song below to share your opinion!</h2>
-<style>
-  h1 {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 45px;
-    font-family: 'FontName', Courgette;
-    }
-  h2 {
-    text-align: center;
-    margin-bottom: 100px;
-    font-size: 20px;
-    color: #724283;
-  }
-  /* Center the table and input forms */
-  .center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  #flaskTable {
-    margin-bottom: 5px;
-  }
-</style>
-<div class="center-container">
-  <table id="flaskTable" class="table table-striped nowrap" style="width:100%">
-    <thead id="flaskHead">
-        <tr>
-            <button onclick="remove()">X</button>
-            <th>Song Name</th>
-            <th>Artist</th>
-            <th>Album</th>
-        </tr>
-    </thead>
-    <tbody id="flaskBody"></tbody>
-  </table>
-</div>
-
-<form class="center-container">
-    <p><label>
-        Song Name:
-        <input type="text" name="songname" id="songname" required>
-    </label></p>
-    <p><label>
-        Artist:
-        <input type="text" name="artist" id="artist" required>
-    </label></p>
-    <p><label>
-        Album:
-        <input type="text" name="album" id="album" required>
-    </label></p>
-    <p>
-        <button type="button" onclick="create_FAV()">Submit New Song</button>
-    </p>
-</form>
-
-<script>
-$(document).ready(function() {
-    const table = $('#flaskTable').DataTable({
-        order: [[0, 'asc']] // Specify sorting column and direction
-    });
-
-    // Fetch data from the API
-    //fetch('http://127.0.0.1:8086/api/FAV/', { mode: 'cors' })
-    fetch('https://maniacmusic.duckdns.org/api/FAV/', { mode: 'cors' })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('API response failed');
-            }
-            return response.json();
-        })
-        .then(data => {
-            for (const row of data) {
-                table.row.add([row.songname, row.artist, row.album]);
-            }
-            table.draw();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-
-function create_FAV() {
-    const body = {
-        songname: document.getElementById("songname").value,
-        artist: document.getElementById("artist").value,
-        album: document.getElementById("album").value,
-    };
-    const requestOptions = {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-            "content-type": "application/json",
-            'Authorization': 'Bearer my-token',
-        },
-    };
-
-    const create_fetch = 'http://127.0.0.1:8086/api/FAV/create';
-
-    fetch(create_fetch, requestOptions)
-        .then(response => {
-            if (response.status == 211) {
-                alert('Song name is missing, or is less than 2 characters, please refresh and enter a valid song name');
-            }
-            if (response.status == 212) {
-                alert('Artist is missing, or is less than 2 characters, please refresh and enter a valid artist');
-            }
-            if (response.status == 213) {
-                alert('Album is missing, or is less than 2 characters, please refresh and enter a valid album');
-            }
-            if (response.status !== 200) {
-                throw new Error('Database create error: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
+    <h1>Community Favorite Songs!</h1>
+    <h2>Add your favorite song below to share your opinion!</h2>
+    <div class="center-container">
+        <table id="flaskTable" class="table table-striped nowrap" style="width:100%">
+            <thead id="flaskHead">
+                <tr>
+                    <th></th>
+                    <th>Song Name</th>
+                    <th>Artist</th>
+                    <th>Album</th>
+                </tr>
+            </thead>
+            <tbody id="flaskBody"></tbody>
+        </table>
+    </div>
+    <form class="center-container">
+        <p><label>
+            Song Name:
+            <input type="text" name="songname" id="songname" required>
+        </label></p>
+        <p><label>
+            Artist:
+            <input type="text" name="artist" id="artist" required>
+        </label></p>
+        <p><label>
+            Album:
+            <input type="text" name="album" id="album" required>
+        </label></p>
+        <p>
+            <button type="button" onclick="create_FAV()">Submit New Song</button>
+        </p>
+    </form>
+    <script>
+        function create_FAV() {
             const table = $('#flaskTable').DataTable();
-            table.row.add([data.songname, data.artist, data.album]).draw();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-        
-function remove() {
-    const table = $('#flaskTable').DataTable();
-    const selectedRow = table.row('.selected');
-
-    if (selectedRow.any()) {
-        selectedRow.remove().draw();
-
-        // Get the song details from the selected row
-        const songName = selectedRow.data()[0];
-        const artist = selectedRow.data()[1];
-        const album = selectedRow.data()[2];
-
-        // Prepare the request body
-        const body = {
-            songname: songName,
-            artist: artist,
-            album: album
-        };
-
-        const requestOptions = {
-            method: 'DELETE',
-            body: JSON.stringify(body),
-            headers: {
-                "content-type": "application/json",
-                'Authorization': 'Bearer my-token'
-            }
-        };
-
-        // Replace 'http://127.0.0.1:8086/api/FAV/delete' local host
-        const deleteURL = 'https://maniacmusic.duckdns.org/api/FAV/delete';
-
-        fetch(deleteURL, requestOptions)
-            .then(response => {
-                if (response.status === 200) {
-                    console.log('Song deleted successfully.');
-                } else {
-                    throw new Error('Failed to delete song: ' + response.status);
+            const songname = $('#songname').val();
+            const artist = $('#artist').val();
+            const album = $('#album').val();
+            const deleteButton = `<button class="remove-button" onclick="removeRow(this)">X</button>`;
+            table.row.add([deleteButton, songname, artist, album]).draw();
+            const body = {
+                songname: songname,
+                artist: artist,
+                album: album
+            };
+            const requestOptions = {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer my-token'
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
+            };
+            fetch('http://192.168.112.141:8086/api/FAV/create', requestOptions)
+                .then(response => {
+                    if (response.status === 200) {
+                        console.log('Song created successfully.');
+                    } else {
+                        throw new Error('Failed to create song: ' + response.status);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        function removeRow(button) {
+            const table = $('#flaskTable').DataTable();
+            const selectedRow = table.row($(button).parents('tr'));
+            if (selectedRow.any()) {
+                const songName = selectedRow.data()[1];
+                const artist = selectedRow.data()[2];
+                const album = selectedRow.data()[3];
+                const body = {
+                    songname: songName,
+                    artist: artist,
+                    album: album
+                };
+                const requestOptions = {
+                    method: 'DELETE',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer my-token'
+                    }
+                };
+                fetch('http://192.168.112.141:8086/api/FAV/delete', requestOptions)
+                    .then(response => {
+                        if (response.status === 200) {
+                            console.log('Song deleted successfully.');
+                            selectedRow.remove().draw();
+                        } else {
+                            throw new Error('Failed to delete song: ' + response.status);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            } else {
+                alert('Please select a row to delete.');
+            }
+        }
+        $(document).ready(function() {
+            const table = $('#flaskTable').DataTable({
+                order: [[0, 'asc']]
             });
-    } else {
-        alert('Please select a row to delete.');
-    }
-}
-</script>
-
+            fetch('http://192.168.112.141:8086/api/FAV/', { mode: 'cors' })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('API response failed');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    for (const row of data) {
+                        const deleteButton = `<button class="remove-button" onclick="removeRow(this)">X</button>`;
+                        table.row.add([deleteButton, row.songname, row.artist, row.album]);
+                    }
+                    table.draw();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-

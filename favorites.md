@@ -141,7 +141,7 @@
                     'Authorization': 'Bearer my-token'
                 }
             };
-            // fetch('http://192.168.112.141:8086/api/FAV/create', requestOptions)
+            //fetch('http://192.168.112.141:8086/api/FAV/create', requestOptions)
             fetch('https://maniacmusic.duckdns.org/api/FAV/create', requestOptions)
                 .then(response => {
                     if (response.status === 200) {
@@ -158,38 +158,43 @@
             const table = $('#flaskTable').DataTable();
             const selectedRow = table.row($(button).parents('tr'));
             if (selectedRow.any()) {
-                const songName = selectedRow.data()[1];
-                const artist = selectedRow.data()[2];
-                const album = selectedRow.data()[3];
-                const body = {
-                    songname: songName,
-                    artist: artist,
-                    album: album
-                };
-                const requestOptions = {
-                    method: 'DELETE',
-                    body: JSON.stringify(body),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer my-token'
-                    }
-                };
-                fetch('https://maniacmusic.duckdns.org/api/FAV/delete', requestOptions)
-                    .then(response => {
-                        if (response.status === 200) {
-                            console.log('Song deleted successfully.');
-                            selectedRow.remove().draw();
-                        } else {
-                            throw new Error('Failed to delete song: ' + response.status);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            } else {
-                alert('Please select a row to delete.');
+                selectedRow.remove().draw();
+                console.log('Song deleted successfully from table.');
             }
-        }
+            }
+            //if (selectedRow.any()) {
+                //const songname = selectedRow.data()[1];
+                //const artist = selectedRow.data()[2];
+                //const album = selectedRow.data()[3];
+                //const body = {
+                    //songname: songname,
+                    //artist: artist,
+                    //album: album
+                //};
+                //const requestOptions = {
+                   // method: 'DELETE',
+                   // body: JSON.stringify(body),
+                   // headers: {
+                        //'Content-Type': 'application/json',
+                       // 'Authorization': 'Bearer my-token'
+                  //  }
+               // };
+               // fetch('https://maniacmusic.duckdns.org/api/FAV/delete', requestOptions)
+                    //.then(response => {
+                       // if (response.status === 200) {
+                           // console.log('Song deleted successfully.');
+                           // selectedRow.remove().draw();
+                      //  } else {
+                            //throw new Error('Failed to delete song: ' + response.status);
+                       // }
+                   // })
+                    //.catch(error => {
+                       // console.error('Error:', error);
+                   // });
+            //} else {
+                //alert('Please select a row to delete.');
+           // }
+       // }
         $(document).ready(function() {
             const table = $('#flaskTable').DataTable({
                 order: [[0, 'asc']]

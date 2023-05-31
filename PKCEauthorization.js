@@ -192,26 +192,43 @@
                 const playlistItem = document.createElement('li');
                 playlistItem.textContent = playlist.name;
                 playlistItem.setAttribute('data-playlist-id', playlist.id); // Set the playlist ID as a data attribute
-                //playlistList.appendChild(playlistItem);
-                const songsList = document.createElement('ul');
-                songsList.classList.add('songs-list');
+                playlistList.appendChild(playlistItem);
+                //const songsList = document.createElement('ul');
                 
-                playlist.tracks = []; // Placeholder for storing playlist tracks
+                //songsList.classList.add('songs-list');
+                
+               // playlist.tracks = []; // Placeholder for storing playlist tracks
                 
                 playlistItem.addEventListener('click', () => {
-                    if (songsList.childElementCount === 0) {
-                      getPlaylistSongs(playlist.id, songsList, playlist.tracks); // Fetch and display playlist songs
-                    } else {
-                      songsList.innerHTML = ''; // Clear the songs list if already populated
-                    }
-                  });
+                   // if (songsList.style.display === 'none') {
+                   //     songsList.style.display = 'block'; // Show the songs list
+                   //     if (songsList.childElementCount === 0) {
+                   //       getPlaylistSongs(playlist.id, songsList, playlist.tracks); // Fetch and display playlist songs
+                   //     }
+                   //   } else {
+                   //     songsList.style.display = 'none'; // Hide the songs list
+                   //   }
+                   // });
 
-                playlistItem.appendChild(songsList);
-                playlistList.appendChild(playlistItem);
+               // playlistItem.appendChild(songsList);
+               // playlistList.appendChild(playlistItem);
                 
-                getPlaylistSongs(playlist.id, songsList, playlist.tracks); // Fetch and display playlist songs
-              });
-            })
+                //getPlaylistSongs(playlist.id, songsList, playlist.tracks); // Fetch and display playlist songs
+              //});
+           // })
+                    const songsList = playlistItem.querySelector('.songs-list');
+                    if (songsList) {
+                        songsList.remove(); // Remove songs list if already present
+                    } else {
+                        const newSongsList = document.createElement('ul');
+                        newSongsList.classList.add('songs-list');
+                        playlistItem.appendChild(newSongsList);
+            
+                        getPlaylistSongs(playlist.id, newSongsList); // Fetch and display playlist songs
+                    }
+                    });
+                });
+                })
              
           .catch((error) => {
             console.error(error);
@@ -219,7 +236,7 @@
           });
       }
 
-      function getPlaylistSongs(playlistId, songsList, playlistTracks) {
+      function getPlaylistSongs(playlistId, songsList) {
         fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
           headers: {
             Authorization: 'Bearer ' + access_token,
@@ -234,14 +251,15 @@
           })
           .then((data) => {
             console.log(data);
+            const tracks = data.items;
             //const songsList = document.getElementById('songs-list');
-            //songsList.innerHTML = ''; // Clear previous songs data
+            songsList.innerHTML = ''; // Clear previous songs data
     
-            data.items.forEach((item) => {
+            tracks.forEach((item) => {
               const songItem = document.createElement('li');
               songItem.textContent = item.track.name;
               songsList.appendChild(songItem);
-              playlistTracks.push(item.track);
+              //playlistTracks.push(item.track);
             });
           })
           .catch((error) => {
@@ -282,19 +300,18 @@
     }
   
     function errorTemplate(data) {
-      return `<h2>Error info</h2>
-        <table>
-          <tr>
-              <td>Status</td>
-              <td>${data.status}</td>
-          </tr>
-          <tr>
-              <td>Message</td>
-              <td>${data.message}</td>
-          </tr>
-        </table>`;
-       
-    }
+        return `<h2>Error info</h2>
+          <table>
+            <tr>
+                <td>Status</td>
+                <td>${data.status}</td>
+            </tr>
+            <tr>
+                <td>Message</td>
+                <td>${data.message}</td>
+            </tr>
+          </table>`;
+      }
   
     // Your client id from your app in the spotify dashboard:
     // https://developer.spotify.com/dashboard/applications

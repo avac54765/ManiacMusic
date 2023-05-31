@@ -141,7 +141,8 @@
                     'Authorization': 'Bearer my-token'
                 }
             };
-            fetch('http://192.168.112.141:8086/api/FAV/create', requestOptions)
+            // fetch('http://192.168.112.141:8086/api/FAV/create', requestOptions)
+            fetch('https://maniacmusic.duckdns.org/api/FAV/create', requestOptions)
                 .then(response => {
                     if (response.status === 200) {
                         console.log('Song created successfully.');
@@ -173,7 +174,7 @@
                         'Authorization': 'Bearer my-token'
                     }
                 };
-                fetch('http://192.168.112.141:8086/api/FAV/delete', requestOptions)
+                fetch('https://maniacmusic.duckdns.org/api/FAV/delete', requestOptions)
                     .then(response => {
                         if (response.status === 200) {
                             console.log('Song deleted successfully.');
@@ -193,7 +194,7 @@
             const table = $('#flaskTable').DataTable({
                 order: [[0, 'asc']]
             });
-            fetch('http://192.168.112.141:8086/api/FAV/', { mode: 'cors' })
+            fetch('https://maniacmusic.duckdns.org/api/FAV/', { mode: 'cors' })
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('API response failed');

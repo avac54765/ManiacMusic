@@ -269,31 +269,16 @@
       }
   
     function userProfileTemplate(data) {
-      return `<h1>Logged in as ${data.display_name}</h1>
-        <table>
-            <tr><td>Display name</td><td>${data.display_name}</td></tr>
-            <tr><td>Id</td><td>${data.id}</td></tr>
-            <tr><td>Email</td><td>${data.email}</td></tr>
-            <tr><td>Spotify URI</td><td><a href="${data.external_urls.spotify}">${data.external_urls.spotify}</a></td></tr>
-            <tr><td>Link</td><td><a href="{{href}">${data.href}</a></td></tr>
-            <tr><td>Profile Image</td><td><a href="${data.images[0]?.url}">${data.images[0]?.url}</a></td></tr>
-            <tr><td>Country</td><td>${data.country}</td></tr>
-        </table>`;
+      return `<h1>Logged in as ${data.display_name}</h1>`;
     }
+
+    
   
     function oAuthTemplate(data) {
-      return `<h2>oAuth info</h2>
+      return `<h2> </h2>
         <table>
           <tr>
-              <td>Access token</td>
-              <td>${data.access_token}</td>
-          </tr>
-          <tr>
-              <td>Refresh token</td>
-              <td>${data.refresh_token}</td>
-          </tr>
-          <tr>
-              <td>Expires at</td>
+              <td>Token Expires at</td>
               <td>${new Date(parseInt(data.expires_at, 10)).toLocaleString()}</td>
           </tr>
         </table>`;

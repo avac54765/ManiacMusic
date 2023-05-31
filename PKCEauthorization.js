@@ -198,6 +198,14 @@
                 
                 playlist.tracks = []; // Placeholder for storing playlist tracks
                 
+                playlistItem.addEventListener('click', () => {
+                    if (songsList.childElementCount === 0) {
+                      getPlaylistSongs(playlist.id, songsList, playlist.tracks); // Fetch and display playlist songs
+                    } else {
+                      songsList.innerHTML = ''; // Clear the songs list if already populated
+                    }
+                  });
+
                 playlistItem.appendChild(songsList);
                 playlistList.appendChild(playlistItem);
                 

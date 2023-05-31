@@ -301,8 +301,8 @@
     // Your client id from your app in the spotify dashboard:
     // https://developer.spotify.com/dashboard/applications
     const client_id = '2b9fdadcb84f421eac431dbf3a2a0581';
-    const redirect_uri = 'http://127.0.0.1:4000/songs.html'; // Your redirect uri
-  
+    //const redirect_uri = 'http://127.0.0.1:4000/songs.html'; // Your redirect uri
+    const redirect_uri = 'https://avac54765.github.io/ManiacMusic/songs.html';
     // Restore tokens from localStorage
     let access_token = localStorage.getItem('access_token') || null;
     let refresh_token = localStorage.getItem('refresh_token') || null;

@@ -21,27 +21,12 @@ In a terminal run:
 
 !!! in all nav bars in the includes: change the html table to not include the repo name in the links !!!
 
----
 example:
-for deployed (notice the /ManiacMusic/)
-<table>
-    <tr>
-        <td><a href="/ManiacMusic/">Home</a></td>
-        <td><a href="/ManiacMusic/eventsapi.html">Events</a></td>
-        <td><a href="/ManiacMusic/songs.html">Spotify</a></td>
-        <td><a href="/ManiacMusic/favorites.html">Your Favorite Songs!</a></td>
-        
-     
-    
-    </tr>
-</table>  
+for deployed (notice the /ManiacMusic/):
+
+<img width="496" alt="image" src="https://github.com/avac54765/ManiacMusic/assets/111486111/37ebd1f0-7ea7-41dd-aeb8-5b4bfc2fa4c7">
+
 
 for local host (notice the removed repo name):
-<table>
-    <tr>
-        <td><a href="/">Home</a></td>
-        <td><a href="/eventsapi.html">Events</a></td>
-        <td><a href="/songs.html">Spotify</a></td>
-        <td><a href="/favorites.html">Your Favorite Songs!</a></td>
-    </tr>
-</table> 
+
+<img width="496" alt="image" src="https://github.com/avac54765/ManiacMusic/assets/111486111/60014cae-a61e-40ec-a209-0fde76ae72f7">

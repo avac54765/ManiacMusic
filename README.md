@@ -5,3 +5,8 @@
 
 ### [Deployed Backend](http://maniacmusic.duckdns.org/)
 ### [Backend Repository](https://github.com/avac54765/maniacflask) and [Deployed Site](https://avac54765.github.io/ManiacMusic/)
+
+Both of the repositories are templates, so feel free to use the templates to create your own repositories with our code. 
+This repository contains edits of the leuck_reunion repository by jm1021.
+
+Clone both repositories to get the full Carlson experience of full stack.
